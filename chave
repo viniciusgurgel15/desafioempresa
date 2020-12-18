@@ -1,0 +1,137 @@
+#include <iostream>
+
+#include <string>
+
+#include <map>
+
+#include <sstream>
+
+using namespace std;
+
+string GroupTotals(string strArr[], int size) 
+
+{
+
+	map <string, int> table;
+
+	
+
+	for (int x = 0; x < size; x++)
+
+	{
+
+		string key;
+
+		int value;
+
+	
+
+		for (int y = 0; y < strArr[x].length(); y++)
+
+		{
+
+	
+
+			if (strArr[x][y] == ':')
+
+			{
+
+				break;
+
+			}
+
+			else
+
+			{
+
+				key += strArr[x][y];
+
+			}
+
+		}
+
+		string num;
+
+		for (int y = strArr[x].find(':') + 1; y < strArr[x].length(); y++)
+
+		{
+
+			num += strArr[x][y];
+
+		}
+
+		istringstream convert(num);
+
+		convert >> value;
+
+	
+
+		if (table.count(key) == 0)
+
+		{
+
+			table[key] = value;
+
+		}
+
+		else
+
+		{
+
+			table[key] += value;
+
+		}
+
+	}
+
+	string result;
+
+	for (auto current = table.begin(); current != table.end(); current++)
+
+	{
+
+	
+
+		if (current->second != 0)
+
+		{
+
+			ostringstream convert; 
+
+			convert << current->second;
+
+			string currentResult = current->first + ":" + convert.str();
+
+			result += currentResult + ",";
+
+		}
+
+	}
+
+	result.pop_back(); 
+
+	return result;
+
+}
+
+int main()
+
+{
+
+	string A[] = { "B:-1", "A:1", "B:3", "A:5" };
+
+	string B[] = { "X:-1", "Y:1", "X:-4", "B:3", "X:5" };
+
+	string C[] = { "Z:0", "A:-1" };
+
+	
+
+	cout << GroupTotals(A, sizeof(A) / sizeof(A[0])) << endl; //  A:6,B:2
+
+	cout << GroupTotals(B, sizeof(B) / sizeof(B[0])) << endl; //  B:3,Y:1
+
+	cout << GroupTotals(C, sizeof(C) / sizeof(C[0])) << endl; //  A:-1
+
+	return 0;
+
+}
