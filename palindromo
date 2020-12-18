@@ -1,0 +1,74 @@
+#include<stdio.h>
+
+#include<stdlib.h>
+
+#include<string.h>
+
+void main(void){
+
+    char entrada[100];
+
+    char entradaespelhada[100];
+
+    char metade1[50];
+
+    char metade2[50];
+
+    int tam=0;
+
+    int tamcalc=0;
+
+    int metade=0;
+
+    printf("Digite uma frase ou palavra para saber se ela e' um palindromo: ");
+
+    scanf("%99[^\n]", entrada);  //le frase de entrada
+
+    for(tam=0; entrada[tam]!='\0'; tam++); //conta o tamanho da string
+
+    tamcalc=tam; // Variavel para calculo da entrada espelhada
+
+    metade=tam/2;// Variavel para calculo das metades
+
+    for(int x=0;x<tam;x++){ //calculo inverter string entrada
+
+        tamcalc--;
+
+        entradaespelhada[x]=entrada[tamcalc];
+
+    }
+
+    entradaespelhada[tam]='\0';// Finaliza a string
+
+    for(int x = 0; x<metade;x++){//Calculo para a primeira metade da string
+
+        metade1[x]=entrada[x];
+
+    }
+
+    metade1[metade]='\0'; //Finaliza string primeira metade
+
+    for(int x=0;x<metade;x++){ // calculos da segunda metade, essa sendo espelhada do final da string entrada
+
+        metade2[x]=entradaespelhada[x];
+
+    }
+
+    metade2[metade]='\0'; //finaliza string metade2
+
+    if(strcmp(metade1,metade2)==0){ // logica para exibir resposta
+
+        printf("E' palindromo");
+
+    }
+
+    else
+
+        printf("nao e' palindromo");
+
+    printf("\nEntrada:%s \nEntrada espelhada:%s  \nprimeira metade:%s \nsegunda metade:%s \ntamanho da string:%i \nmetade da string:%i",entrada,entradaespelhada,metade1,metade2,tam,metade); // impressao de todas as variaveis usadas.
+
+}
+
+ 
+
